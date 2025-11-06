@@ -21,7 +21,6 @@ export default function RootLayout({
         <QueryProvider>
             <html className="h-screen" lang="pt-br">
                 <body className="flex min-h-screen w-full flex-col bg-slate-100 ">
-                    <MenuBar />
                     {children}
                 </body>
             </html>

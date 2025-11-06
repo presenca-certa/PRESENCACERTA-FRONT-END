@@ -1,13 +1,9 @@
-import React from "react";
-import ConfirmaMatricula from "@/app/(public)/confirma-matricula/page";
-import LeitorDeQRCode from "@/app/(public)/leitor-de-qr-code/page";
-import { Sheet } from "@/components/ui/sheet";
-
-import TelaAdicionarEvento from "./(private)/evento/page";
+import { PublicScreen } from "@/components/common/publiScreen";
+import LoginPage from "./(public)/login/page";
 
 const Home = () => (
     <div>
-        <TelaAdicionarEvento />
+        <LoginPage />
     </div>
 );
 
