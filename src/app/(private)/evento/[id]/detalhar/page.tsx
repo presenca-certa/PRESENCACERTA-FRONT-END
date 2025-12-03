@@ -8,7 +8,7 @@ import { ArrowLeft, Lock } from "lucide-react";
 import { Card } from "../../adiciona-evento/components/card";
 import { useParamId } from "@/hooks/use-param-id";
 import { useQuery } from "@tanstack/react-query";
-import { EventoService } from "@/services/Evento";
+import eventoService from "@/services/Evento";
 import { Page } from "@/components/page";
 import { BreadCrumb } from "@/components/bread-crumb";
 

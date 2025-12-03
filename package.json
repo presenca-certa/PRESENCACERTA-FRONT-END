@@ -39,6 +39,7 @@
         "lucide-react": "^0.438.0",
         "next": "14.2.5",
         "node-xlsx": "^0.24.0",
+        "qrcode.react": "^4.2.0",
         "react": "^18",
         "react-day-picker": "^8.10.1",
         "react-dom": "^18",

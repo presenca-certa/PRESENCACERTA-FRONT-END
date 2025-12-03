@@ -9,7 +9,7 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { TurmaService } from "@/services/Turmas";
+import turmaService from "@/services/Turmas";
 import { GetTurmasDto } from "@/services/Turmas/dto/get-turmas.dto";
 import { DropdownMenuCheckboxItemProps } from "@radix-ui/react-dropdown-menu";
 import { useQuery } from "@tanstack/react-query";

@@ -5,7 +5,7 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import { Card } from "./adiciona-evento/components/card";
 import { useQuery } from "@tanstack/react-query";
-import { EventoService } from "@/services/Evento";
+import eventoService from "@/services/Evento";
 import { formatDate } from "date-fns";
 import { GetEventoDto } from "@/services/Evento/dto/get-evento.dto";
 import { Page } from "@/components/page";

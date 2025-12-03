@@ -1,46 +1,68 @@
 import api from "@/api/api";
-import { CreatesEventoDto } from "./dto/create-evento.dto";
-import { GetEventoDto } from "./dto/get-evento.dto";
-import { GetEventoByIdDto } from "./dto/get-evento-by-id.dto";
-import { GetPresencaByTurmaDto } from "./dto/get-presenca-by-turma.dto";
 
-async function createEvento(evento: CreatesEventoDto) {
-    const res = await api.post("/evento", evento);
-
-    return res.data;
+export interface CreateEventoRequest {
+    nome: string;
+    dataInicio: Date;
+    horaInicio: Date;
+    horaFim: Date;
+    turmas: number[];
+    localizacaoId?: number;
 }
 
-async function getEventos(): Promise<GetEventoDto[]> {
-    const res = await api.get("/evento");
-
-    return res.data;
+export interface CreateBatchEventoRequest {
+    nome: string;
+    dataInicio: Date;
+    dataFim: Date;
+    dayOfWeek: number;
+    horaInicio: Date;
+    horaFim: Date;
+    turmas: number[];
+    localizacaoId?: number;
 }
 
-async function getEventoById(id: number): Promise<GetEventoByIdDto> {
-    const res = await api.get(`/evento/${id}`);
-
-    return res.data;
+export interface EventoResponse {
+    id: number;
+    nome: string;
+    dataInicio: Date;
+    dataFim: Date;
+    horaInicio: Date;
+    horaFim: Date;
+    localId?: number;
 }
 
-async function updateEvento(id: string, evento: CreatesEventoDto) {
-    const res = await api.put(`/evento/${id}`, evento);
-
-    return res.data;
+export interface BatchEventoResponse {
+    message: string;
+    eventosCount: number;
+    datesGenerated: number;
+    eventos: EventoResponse[];
 }
 
-async function getPresencaByTurma(
-    id: number,
-    turmaId: number,
-): Promise<GetPresencaByTurmaDto[]> {
-    const res = await api.get(`/evento/${id}/turma/${turmaId}/presencas`);
+const eventoService = {
+    async create(data: CreateEventoRequest): Promise<EventoResponse> {
+        const response = await api.post("/evento", data);
+        return response.data;
+    },
 
-    return res.data;
-}
+    async createBatch(
+        data: CreateBatchEventoRequest,
+    ): Promise<BatchEventoResponse> {
+        const response = await api.post("/evento/batch", data);
+        return response.data;
+    },
 
-export const EventoService = {
-    createEvento,
-    getEventos,
-    getEventoById,
-    updateEvento,
-    getPresencaByTurma,
+    async getAll(): Promise<EventoResponse[]> {
+        const response = await api.get("/evento");
+        return response.data;
+    },
+
+    async getById(id: number): Promise<EventoResponse> {
+        const response = await api.get(`/evento/${id}`);
+        return response.data;
+    },
+
+    async delete(id: number): Promise<void> {
+        await api.delete(`/evento/${id}`);
+    },
 };
+
+export default eventoService;
