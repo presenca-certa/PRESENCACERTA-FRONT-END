@@ -15,6 +15,7 @@ import {
     TableRow,
 } from "@/components/ui/table";
 import { useToast } from "@/hooks/use-toast";
+import MapSelector from "./components/MapSelector";
 
 interface Localizacao {
     id: number;
@@ -27,6 +28,7 @@ interface Localizacao {
 export default function LocalizacoesPage() {
     const { toast } = useToast();
     const [showForm, setShowForm] = useState(false);
+    const [showMap, setShowMap] = useState(false);
     const [formData, setFormData] = useState({
         latitude: "",
         longitude: "",
@@ -42,6 +44,18 @@ export default function LocalizacoesPage() {
             return response.data as Localizacao[];
         },
     });
+
+    const handleMapSelect = (lat: number, lng: number) => {
+        setFormData({
+            ...formData,
+            latitude: lat.toString(),
+            longitude: lng.toString(),
+        });
+        setShowMap(false);
+        toast({
+            description: "Coordenadas selecionadas do mapa",
+        });
+    };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -218,14 +232,42 @@ export default function LocalizacoesPage() {
                             </div>
                         </div>
 
-                        <Button
-                            type="button"
-                            onClick={getCurrentLocation}
-                            className="w-full bg-blue-600 hover:bg-blue-500"
-                            disabled={loading}
-                        >
-                            📍 Usar Localização Atual
-                        </Button>
+                        <div className="flex gap-2">
+                            <Button
+                                type="button"
+                                onClick={getCurrentLocation}
+                                className="flex-1 bg-blue-600 hover:bg-blue-500"
+                                disabled={loading}
+                            >
+                                📍 Usar Localização Atual
+                            </Button>
+                            <Button
+                                type="button"
+                                onClick={() => setShowMap(!showMap)}
+                                className="flex-1 bg-purple-600 hover:bg-purple-500"
+                                disabled={loading}
+                            >
+                                🗺️ Selecionar no Mapa
+                            </Button>
+                        </div>
+
+                        {showMap && (
+                            <div className="border rounded-lg overflow-hidden">
+                                <MapSelector
+                                    onSelectLocation={handleMapSelect}
+                                    initialLat={
+                                        formData.latitude
+                                            ? Number(formData.latitude)
+                                            : -23.5505
+                                    }
+                                    initialLng={
+                                        formData.longitude
+                                            ? Number(formData.longitude)
+                                            : -46.6333
+                                    }
+                                />
+                            </div>
+                        )}
 
                         <Button
                             type="submit"

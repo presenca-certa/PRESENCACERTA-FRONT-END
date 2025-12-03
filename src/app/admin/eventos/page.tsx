@@ -160,7 +160,7 @@ export default function EventosEmLotePage() {
                 horaInicio,
                 horaFim,
                 turmas: formDataLote.turmas,
-                localizacaoId: formDataLote.localizacaoId
+                localId: formDataLote.localizacaoId
                     ? Number(formDataLote.localizacaoId)
                     : undefined,
             });
@@ -214,7 +214,7 @@ export default function EventosEmLotePage() {
                 horaInicio,
                 horaFim,
                 turmas: formDataAvulso.turmas,
-                localizacaoId: formDataAvulso.localizacaoId
+                localId: formDataAvulso.localizacaoId
                     ? Number(formDataAvulso.localizacaoId)
                     : undefined,
             });
