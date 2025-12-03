@@ -16,7 +16,7 @@ import { DatePicker } from "./data-picker";
 import { InputForm } from "./input-form";
 import { MultiSelectTurmas } from "./mult-selected-turmas";
 import { useMutation } from "@tanstack/react-query";
-import { EventoService } from "@/services/Evento";
+import eventoService from "@/services/Evento";
 import * as datefns from "date-fns";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";

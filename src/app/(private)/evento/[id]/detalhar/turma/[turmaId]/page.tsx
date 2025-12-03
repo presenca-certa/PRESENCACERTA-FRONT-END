@@ -10,7 +10,7 @@ import BreadcrumbItem from "antd/es/breadcrumb/BreadcrumbItem";
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import { useParamId } from "@/hooks/use-param-id";
-import { EventoService } from "@/services/Evento";
+import eventoService from "@/services/Evento";
 import { TablePresenca } from "./components/table-presenca-component";
 import { Page } from "@/components/page";
 import { BreadCrumb } from "@/components/bread-crumb";

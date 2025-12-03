@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
     Calendar,
     Home,
@@ -11,6 +12,7 @@ import {
     Settings,
     ShoppingCart,
     Users2,
+    LogOut,
 } from "lucide-react";
 
 import {
@@ -25,8 +27,13 @@ import { Button } from "./ui/button";
 
 export default function MenuBar() {
     const sizeImage = 200;
-
+    const router = useRouter();
     const { isOpen } = useSidebarToggle();
+
+    const handleLogout = () => {
+        localStorage.removeItem("user");
+        router.push("/login");
+    };
 
     return (
         <>
@@ -49,7 +56,24 @@ export default function MenuBar() {
                         <Tooltip>
                             <TooltipTrigger asChild>
                                 <Link
-                                    href="#"
+                                    href="/admin/dashboard"
+                                    className="bg-blue-50 text-blue-500 flex h-9 w-9 items-center justify-center rounded-md transition-colors  md:h-8 md:w-8"
+                                >
+                                    <Home color="#1d4ed8" className="h-5 w-5" />
+                                    <span className=" sr-only"> Admin</span>
+                                </Link>
+                            </TooltipTrigger>
+                            <TooltipContent className="bg-white" side="right">
+                                Admin
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
+
+                    <TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <Link
+                                    href="/admin/eventos"
                                     className="bg-blue-50 text-blue-500 flex h-9 w-9 items-center justify-center rounded-md transition-colors  md:h-8 md:w-8"
                                 >
                                     <Calendar
@@ -61,6 +85,26 @@ export default function MenuBar() {
                             </TooltipTrigger>
                             <TooltipContent className="bg-white" side="right">
                                 Eventos
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
+
+                    <TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <button
+                                    onClick={handleLogout}
+                                    className="bg-red-50 text-red-500 flex h-9 w-9 items-center justify-center rounded-md transition-colors  md:h-8 md:w-8 mt-auto"
+                                >
+                                    <LogOut
+                                        color="#dc2626"
+                                        className="h-5 w-5"
+                                    />
+                                    <span className=" sr-only"> Sair</span>
+                                </button>
+                            </TooltipTrigger>
+                            <TooltipContent className="bg-white" side="right">
+                                Sair
                             </TooltipContent>
                         </Tooltip>
                     </TooltipProvider>
@@ -87,7 +131,7 @@ export default function MenuBar() {
                             >
                                 <nav className="grid gap-6 text-lg font-medium ">
                                     <Link
-                                        href="#"
+                                        href="/admin/dashboard"
                                         className=" text-blue-500 bg-blue-950 flex h-full w-full items-center justify-center   md:h-8 md:w-8 px-8 py-4"
                                     >
                                         <Image
@@ -101,7 +145,17 @@ export default function MenuBar() {
                                         </span>
                                     </Link>
                                     <Link
-                                        href="#"
+                                        href="/admin/dashboard"
+                                        className="mx-6 bg-blue-100 p-2 rounded-md  flex items-center gap-2 px-2.5 text-blue-600 font-medium text-base"
+                                    >
+                                        <Home
+                                            color="#1d4ed8"
+                                            className="h-5 w-5"
+                                        />
+                                        Admin
+                                    </Link>
+                                    <Link
+                                        href="/admin/eventos"
                                         className="mx-6 bg-blue-100 p-2 rounded-md  flex items-center gap-2 px-2.5 text-blue-600 font-medium text-base"
                                     >
                                         <Calendar
@@ -110,6 +164,16 @@ export default function MenuBar() {
                                         />
                                         Eventos
                                     </Link>
+                                    <button
+                                        onClick={handleLogout}
+                                        className="mx-6 bg-red-100 p-2 rounded-md  flex items-center gap-2 px-2.5 text-red-600 font-medium text-base"
+                                    >
+                                        <LogOut
+                                            color="#dc2626"
+                                            className="h-5 w-5"
+                                        />
+                                        Sair
+                                    </button>
                                 </nav>
                             </SheetContent>
                         </Sheet>
