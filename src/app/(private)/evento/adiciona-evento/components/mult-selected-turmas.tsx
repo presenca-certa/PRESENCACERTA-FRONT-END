@@ -27,7 +27,7 @@ export function MultiSelectTurmas({
 
     const { data } = useQuery({
         queryKey: ["turmas"],
-        queryFn: async () => await TurmaService.getTurmasList(),
+        queryFn: async () => await turmaService.getAllList(),
     });
 
     useEffect(() => {
